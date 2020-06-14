@@ -14,7 +14,7 @@ class DeckCreate extends Component {
         this.state = {
             deckName: ''
         }
-        this.handleChange = this.handleChange.bind(this)
+        this.handleText = this.handleText.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
@@ -25,8 +25,6 @@ class DeckCreate extends Component {
         //async storage
         
         let deckState = this.props.decks
-
-        console.log(decks)
 
         let decks = Object.assign(
             {...deckState},
@@ -45,9 +43,9 @@ class DeckCreate extends Component {
         })
     }
 
-    handleChange(event){
+    handleText(name, value) {
         this.setState({
-            deckName: event.target.value
+            [name]: value
         })
     }
 
@@ -72,7 +70,7 @@ class DeckCreate extends Component {
             <TextInput 
                 style={styles.border}
                 value={this.state.deckName}
-                onChange={this.handleChange}
+                onChangeText = {(text) => this.handleText("deckName", text)}
             />
             <TouchableOpacity 
                 style={styles.blueButton}

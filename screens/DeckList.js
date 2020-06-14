@@ -55,14 +55,16 @@ class DeckList extends Component {
             <FlatList
                 style={styles.container}
                 data={decks}
+                keyExtractor={(item, index) => item}                
                 renderItem={
                     ({item}) => 
+                    
                     <ListDeck 
                         name={item}
                         size={this.props.decks[item].questions.length}
+                        
                     /> } 
             />
-                {/* {decks.map((deck) => <ListDeck key={deck} name={deck} size={deckSize} />)} */}
             </View>
             
         )

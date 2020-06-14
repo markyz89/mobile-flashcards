@@ -16,24 +16,18 @@ class AddCard extends Component {
             question: '',
             answer: ''
         }
-        this.handleQuestion = this.handleQuestion.bind(this)
-        this.handleAnswer = this.handleAnswer.bind(this)
+        this.handleText = this.handleText.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
 
-    handleQuestion(event) {
+    handleText(name, value) {
         this.setState({
-            question: event.target.value
+            [name]: value
         })
     }
 
-    handleAnswer(event) {
-        this.setState({
-            answer: event.target.value
-        })
-    }
-    handleSubmit(){
+    handleSubmit(value){
         let question = {
             question: this.state.question,
             answer: this.state.answer,
@@ -74,7 +68,7 @@ class AddCard extends Component {
 
     
     render() {
-        console.log(this.props.decks)
+
         return(
             <View style={styles.container}>
                 <Text>Enter your question</Text>
@@ -83,7 +77,7 @@ class AddCard extends Component {
                     multiline = {true}
                     numberOfLines = {2}
                     value={this.state.question}
-                    onChange = {this.handleQuestion}
+                    onChangeText = {(text) => this.handleText("question", text)}
                 />
                 <Text>Enter the answer to this question</Text>
                 <TextInput
@@ -91,7 +85,7 @@ class AddCard extends Component {
                     multiline = {true}
                     numberOfLines = {4}
                     value={this.state.answer}
-                    onChange = {this.handleAnswer}
+                    onChangeText = {(text) => this.handleText("answer", text)}
                 />
                 <TouchableOpacity 
                     style={styles.button, styles.greenButton}

@@ -7,12 +7,14 @@ import Question from '../components/Question'
 class QuizView extends Component {
     
     render() {
-        const { deck,} = this.props
-        console.log(deck)
+        const { deck } = this.props
         
-        return(
-            <Question deck={deck} navigation={this.props.navigation} />
-        )
+            return(
+                <View style={styles.container}>
+                    <Question deck={deck} navigation={this.props.navigation} />
+                </View>
+                
+            )
     }
     
 } 
@@ -23,20 +25,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         padding: 40,
        
-      },
-    heading:{
-        fontSize: 20,
-    },
-    button: {
-        backgroundColor: 'green',
-        padding: 5,
-    }
+      }
 })
 
 function mapStateToProps(state, props) {
 
     const deck = state[props.route.params.deckName]
-    console.log(props)
     
     return {
         deck

@@ -57,7 +57,6 @@ export default function reducer (state = intitialState, action) {
                     }
             }
             case GET_CARDS:
-                console.log(action)
                 let newState = {}
                 Object.assign(newState, state)
 
@@ -80,7 +79,6 @@ export default function reducer (state = intitialState, action) {
 
                 return newState
             case GET_DECKS:
-                console.log(action)
                 return {
                     ...state,
                     ...action.decks
@@ -88,7 +86,6 @@ export default function reducer (state = intitialState, action) {
                 }
             
             case ADD_DECK:
-                console.log(action)
                 return {
                     ...state,
                     [action.deck]: {

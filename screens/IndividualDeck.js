@@ -18,13 +18,17 @@ class IndividualDeck extends Component {
                     > 
                     <Text>Add Card</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
+                {this.props[this.props.route.params.deckName].questions.length &&
+                    <TouchableOpacity
                     onPress={() => this.props.navigation.navigate('Quiz View', {
                         deckName: this.props.route.params.deckName,
                     })}
-                >
+                     >
                     <Text>Start Quiz</Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                }
+                
+                    
             </View>
         )
     }

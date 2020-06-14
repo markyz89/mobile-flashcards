@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { answerQuestion } from '../actions';
 import { connect } from 'react-redux'
-import { useNavigation } from '@react-navigation/native';
 
-import QuizComplete from './QuizComplete'
-import { textChangeRangeIsUnchanged } from 'typescript';
+import {
+    setLocalNotification,
+    clearLocalNotifications
+} from '../utils/notifications'
+
 
 
 class Question extends Component {
@@ -25,7 +26,7 @@ class Question extends Component {
         this.resetQuiz = this.resetQuiz.bind(this)
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.randomQuestion()
     }
 
@@ -42,7 +43,6 @@ class Question extends Component {
                     answeredQuestions: questionArray,
                     answerShow: false      
                 })
-                console.log(this.props)
             } else {
                 // recursion for when the random number returned is already in the array of numbers used.
                 this.randomQuestion()
@@ -78,10 +78,10 @@ class Question extends Component {
             complete: false,
             answerShow: false
         }, () => {
-            console.log(this.state)
             this.randomQuestion()
         })
-        
+        clearLocalNotifications()
+            .then(setLocalNotification)
     }
 
     render() {
@@ -154,24 +154,7 @@ class Question extends Component {
     }
     
 }
-
-// this component needs some logic to keep track of questions answered.
-// this will need to be added to the redux state for each question?
-// if it has been answered? Whether the user chose that the answer was correct or not
-// a count of all questions that have been answered
-// this count needs to be displayed
-// when it gets to the end, the quiz ends.
-// then the count of the questions answered correctly is shown.
-// this is probably the msot difficult part of the project - logic-wise
-
-
-// count - keep in local state (screen - quiz view - pass down as props) - don't want to mess up redux store - count and total
-// render different component for quiz completion
-// on buttons create an onPress method that update the count in the store for correct and total
-// then just display that on the component rendered
-
-    
-
+  
 
 const styles = StyleSheet.create({
     container: {
@@ -217,10 +200,6 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        answerQuestion: (answer) => {dispatch(answerQuestion(answer))}
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question)
+
+export default connect(mapStateToProps)(Question)
