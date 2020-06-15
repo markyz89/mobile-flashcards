@@ -54,7 +54,7 @@ class DeckCreate extends Component {
           await AsyncStorage.setItem(
             DECK_KEY,
             JSON.stringify(decks)
-          );
+          ).then()
         } catch (error) {
           // Error saving data
           console.log(error)
@@ -66,19 +66,19 @@ class DeckCreate extends Component {
 
         return(
             <View style={styles.container}>
-            <Text style={styles.heading}>What is the title of your new deck?</Text>
-            <TextInput 
-                style={styles.border}
-                value={this.state.deckName}
-                onChangeText = {(text) => this.handleText("deckName", text)}
-            />
-            <TouchableOpacity 
-                style={styles.blueButton}
-                onPress={this.handleSubmit}    
-            >
+                <Text style={styles.heading}>What is the title of your new deck?</Text>
+                <TextInput 
+                    style={styles.border}
+                    value={this.state.deckName}
+                    onChangeText = {(text) => this.handleText("deckName", text)}
+                />
+                <TouchableOpacity 
+                    style={styles.blueButton}
+                    onPress={() => {this.handleSubmit()}}    
+                >
                 <Text style={{color:'#fff'}}>Create Deck</Text>
-            </TouchableOpacity>
-        </View>
+                </TouchableOpacity>
+            </View>
         )
     }
     

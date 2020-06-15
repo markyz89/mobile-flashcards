@@ -4,7 +4,21 @@ import { connect } from 'react-redux'
 
 
 class IndividualDeck extends Component {
- 
+
+    renderButton(){
+        if(this.props[this.props.route.params.deckName].questions.length) {
+            return (
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Quiz View', {
+                            deckName: this.props.route.params.deckName,
+                        })}
+                >
+                    <Text>Start Quiz</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
+
     render() {
 
         return(
@@ -18,17 +32,8 @@ class IndividualDeck extends Component {
                     > 
                     <Text>Add Card</Text>
                 </TouchableOpacity>
-                {this.props[this.props.route.params.deckName].questions.length &&
-                    <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('Quiz View', {
-                        deckName: this.props.route.params.deckName,
-                    })}
-                     >
-                    <Text>Start Quiz</Text>
-                    </TouchableOpacity>
-                }
-                
-                    
+                {this.renderButton()}
+
             </View>
         )
     }
